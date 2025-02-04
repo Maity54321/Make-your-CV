@@ -43,42 +43,109 @@ const grShow = () => {
     Graduation.style.display = "block";
 }
 
+
+if(checkbox1 !== null){
+    checkbox1.addEventListener('click', () => {
+        if(checkbox1.checked == true){
+            secondaryShow();
+        }
+        // else{
+        //     secondary.style.display = "none";
+        // }
+    //     // userVal = userName.value;
+    //     // addVal = address.value;
+    //     // numVal = number.value;
+    })
+    
+}
+
+if(checkbox2 !== null){
+    checkbox2.addEventListener('click', () => {
+        if(checkbox2.checked == true){
+            hsShow();
+        }
+        // myearVal = Myear.value;
+        // mperVal = Mper.value;
+        // mschVal = Msch.value;
+        // mboardVal = Mboard.value;
+    })
+}
+
+if(checkbox3 !== null){
+    checkbox3.addEventListener('click', () => {
+        if(checkbox3.checked == true){
+            grShow();
+        }
+        // hyearVal = Hyear.value;
+        // hperVal = Hper.value;
+        // hstrVal = Hstr.value;
+        // hboardVal = Hboard.value;
+    })
+}
+
+let letter = /^[a-zA-Z ]*$/;
+
 let userVal;
 let addVal;
 let numVal;
-if(checkbox1 !== null){
-    checkbox1.addEventListener('click', () => {
-        secondaryShow();
-        userVal = userName.value;
-        addVal = address.value;
-        numVal = number.value;
-    })
-}
+
 let myearVal;
 let mperVal;
 let mschVal;
 let mboardVal;
-if(checkbox2 !== null){
-    checkbox2.addEventListener('click', () => {
-        hsShow();
-        myearVal = Myear.value;
-        mperVal = Mper.value;
-        mschVal = Msch.value;
-        mboardVal = Mboard.value;
-    })
-}
+
 let hyearVal;
 let hperVal;
 let hstrVal;
 let hboardVal;
-if(checkbox3 !== null){
-    checkbox3.addEventListener('click', () => {
-        grShow();
-        hyearVal = Hyear.value;
-        hperVal = Hper.value;
-        hstrVal = Hstr.value;
-        hboardVal = Hboard.value;
-    })
+
+let gyearVal;
+let gcgpaVal;
+let gsubVal;
+let gdegVal;
+let guniVal;
+
+const mDetails = (e) => {
+    if(!checkbox1.checked){                                     // after checked and filled up the values in 10th , problem of being unchecked
+        alert('Minimum 10th pass required for making your CV here!');
+        e.preventDefault();
+    }
+    else if(myearVal == "" || mperVal == "" || mschVal == "" || mboardVal == ""){
+        alert('Fill up all the details for 10th!');
+        e.preventDefault();
+    }
+}
+
+const hgDetails = (e) => {
+    if(checkbox2.checked){
+        if(hyearVal == "" || hperVal == "" || hstrVal == "" || hboardVal == ""){
+            alert('Fill up all the details for 12th!');
+            e.preventDefault();
+        }
+    }
+    if(checkbox3.checked){
+        if(gyearVal == "" || gcgpaVal == "" || gsubVal == "" || gdegVal == "" || guniVal == ""){
+            alert('Fill up all the details for Graduation!');
+            e.preventDefault();
+        }
+    }
+}
+
+const validation = (e) => {
+
+    if(userVal == "" || addVal == "" || numVal == ""){
+        alert('Please fill all the details!!');
+        e.preventDefault();
+    }
+    else if((!userVal.match(letter)) || (!mschVal.match(letter)) || (!mboardVal.match(letter)) || (!hstrVal.match(letter)) || (!hboardVal.match(letter)) || (!gsubVal.match(letter)) || (!gdegVal.match(letter)) || (!guniVal.match(letter))){
+        alert('Only alphabets are allowed in "Name" , "School" , "Board" , "Stream" , "Subject" , "Degree" , "University" areas!!');
+        e.preventDefault();
+    }
+    else if(numVal.length != 10){
+        alert('Phone_no. must have 10 digits!!');
+        e.preventDefault();
+    }
+    
 }
 
 
@@ -93,20 +160,36 @@ if(checkbox3 !== null){
 // }
 
 
-let gyearVal;
-let gcgpaVal;
-let gsubVal;
-let gdegVal;
-let guniVal;
+
 if(button !== null){
-    button.addEventListener('click', () => {
-        event.preventDefault();
-        console.log(userVal)                                    // why am I getting this undefined?
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        // console.log(userVal)                                    // why am I getting this undefined?
+
+        userVal = userName.value;
+        addVal = address.value;
+        numVal = number.value;
+
+        myearVal = Myear.value;
+        mperVal = Mper.value;
+        mschVal = Msch.value;
+        mboardVal = Mboard.value;
+
+        hyearVal = Hyear.value;
+        hperVal = Hper.value;
+        hstrVal = Hstr.value;
+        hboardVal = Hboard.value;
+
         gyearVal = Gyear.value;
         gcgpaVal = Gcgpa.value;
         gsubVal = Gsub.value;
         gdegVal = Gdeg.value;
         guniVal = Guni.value;
+
+        validation();
+        mDetails();
+        hgDetails();
+
         // console.log(addVal)
         // console.log(numVal)
         // nameExc();
@@ -197,4 +280,16 @@ if(secName !== null || secAdd !== null || secNum !== null || secMyear !== null |
     secGrsub.textContent = GsubVal;
     secGrdeg.textContent = GdegVal;
     secGruni.textContent = GuniVal;
+}
+
+
+const gridContainerSec = document.getElementById("gridContainer2");
+const gridContainerTh = document.getElementById("gridContainer3");
+
+if(HyearVal!== "" || HperVal!== "" || HstrVal!== "" || HboardVal!== ""){
+    gridContainerSec.style.visibility = "visible";
+}
+
+if(GyearVal!== "" || GcgpaVal!== "" || GsubVal!== "" || GdegVal!== "" || GuniVal!== ""){
+    gridContainerTh.style.visibility = "Visible";
 }

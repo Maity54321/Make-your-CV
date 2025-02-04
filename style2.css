@@ -41,10 +41,34 @@ body{
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-#gridContainer{
+#gridContainer1{
     display: grid;
     grid-template-columns: 170px 100px auto;
     gap: 0.5rem 1.5rem;
     margin-top: 2rem;
     margin-left: 4rem;
+}
+#gridContainer2{
+    visibility: hidden;
+}
+.gridContainerS{
+    display: grid;
+    grid-template-columns: 170px 100px auto;
+    gap: 0.5rem 1.5rem;
+    margin-top: 2rem;
+    margin-left: 4rem;
+}
+#gridContainer3{
+    visibility: hidden;
+}
+.gridContainerT{
+    display: grid;
+    grid-template-columns: 170px 100px auto;
+    gap: 0.5rem 1.5rem;
+    margin-top: 2rem;
+    margin-left: 4rem;
+}
+#icon{
+    font-size: 2rem;
+    color: black;
 }
