@@ -34,21 +34,43 @@ let Guni = document.getElementById("Guni");
 
 
 const secondaryShow = () => {
-    secondary.style.display = "block";
+    if(checkbox1.checked == true){
+        secondary.style.display = "block";
+    }
+    else if (checkbox2.checked == true || checkbox3.checked == true){
+        alert('Please uncheck 12th and Graduation checkbox first!');
+        checkbox1.checked = true;
+    }
+    else{
+        secondary.style.display = "none";
+    }
+    
 }
 const hsShow =() => {
-    hs.style.display = "block";
+    if(checkbox2.checked == true){
+        hs.style.display = "block";
+    }
+    else if (checkbox3.checked == true){
+        alert('Please uncheck Graduation checkbox first!');
+        checkbox2.checked = true;
+    }
+    else{
+        hs.style.display = "none";
+    }
 }
 const grShow = () => {
-    Graduation.style.display = "block";
+    if(checkbox3.checked == true){
+        Graduation.style.display = "block";
+    }
+    else{
+        Graduation.style.display = "none";
+    }
 }
 
 
 if(checkbox1 !== null){
     checkbox1.addEventListener('click', () => {
-        if(checkbox1.checked == true){
-            secondaryShow();
-        }
+        secondaryShow();
         // else{
         //     secondary.style.display = "none";
         // }
@@ -61,9 +83,7 @@ if(checkbox1 !== null){
 
 if(checkbox2 !== null){
     checkbox2.addEventListener('click', () => {
-        if(checkbox2.checked == true){
-            hsShow();
-        }
+        hsShow();
         // myearVal = Myear.value;
         // mperVal = Mper.value;
         // mschVal = Msch.value;
@@ -73,9 +93,7 @@ if(checkbox2 !== null){
 
 if(checkbox3 !== null){
     checkbox3.addEventListener('click', () => {
-        if(checkbox3.checked == true){
-            grShow();
-        }
+        grShow();
         // hyearVal = Hyear.value;
         // hperVal = Hper.value;
         // hstrVal = Hstr.value;
@@ -84,6 +102,7 @@ if(checkbox3 !== null){
 }
 
 let letter = /^[a-zA-Z ]*$/;
+let checkNumber = /[\D]/g;
 
 let userVal;
 let addVal;
@@ -137,12 +156,16 @@ const validation = (e) => {
         alert('Please fill all the details!!');
         e.preventDefault();
     }
-    else if((!userVal.match(letter)) || (!mschVal.match(letter)) || (!mboardVal.match(letter)) || (!hstrVal.match(letter)) || (!hboardVal.match(letter)) || (!gsubVal.match(letter)) || (!gdegVal.match(letter)) || (!guniVal.match(letter))){
+    else if((!userVal.match(letter)) || (!mboardVal.match(letter)) || (!hstrVal.match(letter)) || (!hboardVal.match(letter)) || (!gsubVal.match(letter)) || (!gdegVal.match(letter)) || (!guniVal.match(letter))){
         alert('Only alphabets are allowed in "Name" , "School" , "Board" , "Stream" , "Subject" , "Degree" , "University" areas!!');
         e.preventDefault();
     }
     else if(numVal.length != 10){
         alert('Phone_no. must have 10 digits!!');
+        e.preventDefault();
+    }
+    else if(!mschVal.match(checkNumber)){                             // not working
+        alert('Numbers are not allowed');
         e.preventDefault();
     }
     
@@ -270,16 +293,21 @@ if(secName !== null || secAdd !== null || secNum !== null || secMyear !== null |
     secMsch.textContent = MschVal;
     secMboard.textContent = MboardVal;
 
-    secHyear.textContent = HyearVal;
-    secHper.textContent = HperVal;
-    secHstr.textContent = HstrVal;
-    secHboard.textContent = HboardVal;
+    if(checkbox2.checked == true){
+        secHyear.textContent = HyearVal;
+        secHper.textContent = HperVal;
+        secHstr.textContent = HstrVal;
+        secHboard.textContent = HboardVal;
+    }
 
-    secGryear.textContent = GyearVal;
-    secGrcgpa.textContent = GcgpaVal;
-    secGrsub.textContent = GsubVal;
-    secGrdeg.textContent = GdegVal;
-    secGruni.textContent = GuniVal;
+    if(checkbox3.checked == true){
+        secGryear.textContent = GyearVal;
+        secGrcgpa.textContent = GcgpaVal;
+        secGrsub.textContent = GsubVal;
+        secGrdeg.textContent = GdegVal;
+        secGruni.textContent = GuniVal;
+    }
+
 }
 
 
