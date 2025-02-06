@@ -43,6 +43,7 @@ const secondaryShow = () => {
     }
     else{
         secondary.style.display = "none";
+
     }
     
 }
@@ -64,6 +65,25 @@ const grShow = () => {
     }
     else{
         Graduation.style.display = "none";
+    }
+}
+
+const hsUncheck = () => {
+    if(checkbox2.checked == false){
+        hyearVal = "";
+        hperVal = "";
+        hstrVal = "";
+        hboardVal = "";
+    }
+}
+
+const grUncheck = () => {
+    if(checkbox3.checked == false){
+        gyearVal = "";
+        gcgpaVal = "";
+        gsubVal = "";
+        gdegVal = "";
+        guniVal = "";
     }
 }
 
@@ -208,6 +228,8 @@ if(button !== null){
         validation();
         mDetails();
         hgDetails();
+        hsUncheck();
+        grUncheck();
 
         // console.log(addVal)
         // console.log(numVal)
