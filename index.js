@@ -205,7 +205,7 @@ if(button !== null){
         gdegVal = Gdeg.value;
         guniVal = Guni.value;
 
-        // validation();
+        validation();
         mDetails();
         hgDetails();
 
