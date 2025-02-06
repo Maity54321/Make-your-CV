@@ -102,7 +102,7 @@ if(checkbox3 !== null){
 }
 
 let letter = /^[a-zA-Z ]*$/;
-let checkNumber = /[\D]/g;
+// let checkNumber = /[\D]/g;
 
 let userVal;
 let addVal;
@@ -156,16 +156,12 @@ const validation = (e) => {
         alert('Please fill all the details!!');
         e.preventDefault();
     }
-    else if((!userVal.match(letter)) || (!mboardVal.match(letter)) || (!hstrVal.match(letter)) || (!hboardVal.match(letter)) || (!gsubVal.match(letter)) || (!gdegVal.match(letter)) || (!guniVal.match(letter))){
+    else if((!userVal.match(letter)) || (!mschVal.match(letter)) || (!mboardVal.match(letter)) || (!hstrVal.match(letter)) || (!hboardVal.match(letter)) || (!gsubVal.match(letter)) || (!gdegVal.match(letter)) || (!guniVal.match(letter))){
         alert('Only alphabets are allowed in "Name" , "School" , "Board" , "Stream" , "Subject" , "Degree" , "University" areas!!');
         e.preventDefault();
     }
     else if(numVal.length != 10){
         alert('Phone_no. must have 10 digits!!');
-        e.preventDefault();
-    }
-    else if(!mschVal.match(checkNumber)){                             // not working
-        alert('Numbers are not allowed');
         e.preventDefault();
     }
     
@@ -209,7 +205,7 @@ if(button !== null){
         gdegVal = Gdeg.value;
         guniVal = Guni.value;
 
-        validation();
+        // validation();
         mDetails();
         hgDetails();
 
@@ -293,20 +289,20 @@ if(secName !== null || secAdd !== null || secNum !== null || secMyear !== null |
     secMsch.textContent = MschVal;
     secMboard.textContent = MboardVal;
 
-    if(checkbox2.checked == true){
+    // if(checkbox2.checked == true){
         secHyear.textContent = HyearVal;
         secHper.textContent = HperVal;
         secHstr.textContent = HstrVal;
         secHboard.textContent = HboardVal;
-    }
+    // }
 
-    if(checkbox3.checked == true){
+    // if(checkbox3.checked == true){
         secGryear.textContent = GyearVal;
         secGrcgpa.textContent = GcgpaVal;
         secGrsub.textContent = GsubVal;
         secGrdeg.textContent = GdegVal;
         secGruni.textContent = GuniVal;
-    }
+    // }
 
 }
 
@@ -319,5 +315,5 @@ if(HyearVal!== "" || HperVal!== "" || HstrVal!== "" || HboardVal!== ""){
 }
 
 if(GyearVal!== "" || GcgpaVal!== "" || GsubVal!== "" || GdegVal!== "" || GuniVal!== ""){
-    gridContainerTh.style.visibility = "Visible";
+    gridContainerTh.style.visibility = "visible";
 }
