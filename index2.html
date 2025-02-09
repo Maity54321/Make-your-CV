@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style2.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
     <div id="main">
         <div id="info">
             <h1 id="secName"></h1>
             <div id="secLine">
-                <div id="secAdd"></div>
-                <div id="secNum"></div>
+                <div id="CVaddress">
+                    <ion-icon name="home" class="icon"></ion-icon>
+                    <div id="secAdd"></div>
+                </div>
+                <div id="CVnumber">
+                    <ion-icon name="call" class="icon"></ion-icon>
+                    <div id="secNum"></div>
+                </div>
             </div>
         </div>
         <div id="education">
@@ -67,6 +75,13 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        <button id="downloadCV">Download</button>
+    </div>
+    <div>
+        <button id="refreshButton">Home</button>
     </div>
 
     <script src="index.js"></script>

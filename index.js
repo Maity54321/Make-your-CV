@@ -122,7 +122,7 @@ if(checkbox3 !== null){
 }
 
 let letter = /^[a-zA-Z ]*$/;
-// let checkNumber = /[\D]/g;
+let checkNumber = /[0-9]/g;
 
 let userVal;
 let addVal;
@@ -165,7 +165,7 @@ const hgDetails = (e) => {
     if(checkbox3.checked){
         if(gyearVal == "" || gcgpaVal == "" || gsubVal == "" || gdegVal == "" || guniVal == ""){
             alert('Fill up all the details for Graduation!');
-            e.preventDefault();
+            e.preventDefault();                                               // problem this all e
         }
     }
 }
@@ -176,12 +176,16 @@ const validation = (e) => {
         alert('Please fill all the details!!');
         e.preventDefault();
     }
-    else if((!userVal.match(letter)) || (!mschVal.match(letter)) || (!mboardVal.match(letter)) || (!hstrVal.match(letter)) || (!hboardVal.match(letter)) || (!gsubVal.match(letter)) || (!gdegVal.match(letter)) || (!guniVal.match(letter))){
-        alert('Only alphabets are allowed in "Name" , "School" , "Board" , "Stream" , "Subject" , "Degree" , "University" areas!!');
+    else if((!userVal.match(letter)) || (!hstrVal.match(letter)) || (!gdegVal.match(letter))){
+        alert('Only alphabets are allowed in "Name" , "Stream" , "Degree" areas!!');
         e.preventDefault();
     }
     else if(numVal.length != 10){
         alert('Phone_no. must have 10 digits!!');
+        e.preventDefault();
+    }
+    else if(mschVal.match(checkNumber) || (mboardVal.match(checkNumber)) || (hboardVal.match(checkNumber)) || (gsubVal.match(checkNumber)) || (guniVal.match(checkNumber))){
+        alert('Numbers not allowed in "School" , "Board" , "Subject" , "University" areas!!');
         e.preventDefault();
     }
     
@@ -332,10 +336,25 @@ if(secName !== null || secAdd !== null || secNum !== null || secMyear !== null |
 const gridContainerSec = document.getElementById("gridContainer2");
 const gridContainerTh = document.getElementById("gridContainer3");
 
-if(HyearVal!== "" || HperVal!== "" || HstrVal!== "" || HboardVal!== ""){
-    gridContainerSec.style.visibility = "visible";
+if(gridContainerSec !== null){
+    if(HyearVal!== "" || HperVal!== "" || HstrVal!== "" || HboardVal!== ""){
+        gridContainerSec.style.visibility = "visible";
+    }
 }
 
-if(GyearVal!== "" || GcgpaVal!== "" || GsubVal!== "" || GdegVal!== "" || GuniVal!== ""){
-    gridContainerTh.style.visibility = "visible";
+if(gridContainerTh !== null){
+    if(GyearVal!== "" || GcgpaVal!== "" || GsubVal!== "" || GdegVal!== "" || GuniVal!== ""){
+        gridContainerTh.style.visibility = "visible";
+    }
+}
+
+
+
+const refreshButton = document.getElementById("refreshButton");
+
+if(refreshButton !== null){
+    refreshButton.addEventListener('click', (e) => {
+        location.href = 'index.html';
+        e.preventDefault();                              // not working, refresh automatically on this button, opposite page main back arrow <-
+    } )
 }
