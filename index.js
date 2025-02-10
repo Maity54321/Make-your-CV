@@ -1,3 +1,12 @@
+window.onload = (e) =>{
+    if(e.currentTarget.performance.navigation.type == 1){
+        localStorage.clear();
+    }
+    
+    // console.log(e.currentTarget.performance.navigation.type);
+}
+
+
 const checkbox1 = document.getElementById("checkbox1");
 const checkbox2 = document.getElementById("checkbox2");
 const checkbox3 = document.getElementById("checkbox3");
@@ -34,58 +43,63 @@ let Guni = document.getElementById("Guni");
 
 
 const secondaryShow = () => {
-    if(checkbox1.checked == true){
+    if(checkbox1 && checkbox1.checked == true){
         secondary.style.display = "block";
     }
-    else if (checkbox2.checked == true || checkbox3.checked == true){
+    else if ((checkbox2 && checkbox2.checked == true) || (checkbox3 && checkbox3.checked == true)){
         alert('Please uncheck 12th and Graduation checkbox first!');
         checkbox1.checked = true;
     }
     else{
-        secondary.style.display = "none";
-
+        if(secondary){
+            secondary.style.display = "none";
+        }
     }
     
 }
 const hsShow =() => {
-    if(checkbox2.checked == true){
+    if(checkbox2 && checkbox2.checked == true){
         hs.style.display = "block";
     }
-    else if (checkbox3.checked == true){
+    else if (checkbox3 && checkbox3.checked == true){
         alert('Please uncheck Graduation checkbox first!');
         checkbox2.checked = true;
     }
     else{
-        hs.style.display = "none";
+        if(hs){
+            hs.style.display = "none";
+        }
     }
 }
 const grShow = () => {
-    if(checkbox3.checked == true){
+    if(checkbox3 && checkbox3.checked == true){
         Graduation.style.display = "block";
     }
     else{
-        Graduation.style.display = "none";
+        if(Graduation){
+            Graduation.style.display = "none";
+        }
     }
 }
 
-const hsUncheck = () => {
-    if(checkbox2.checked == false){
-        hyearVal = "";
-        hperVal = "";
-        hstrVal = "";
-        hboardVal = "";
-    }
-}
+// const hsUncheck = () => {
+//     if(checkbox2.checked == false){
+//         hyearVal = "";
+//         hperVal = "";
+//         hstrVal = "";
+//         hboardVal = "";
+//     }
+// }
 
-const grUncheck = () => {
-    if(checkbox3.checked == false){
-        gyearVal = "";
-        gcgpaVal = "";
-        gsubVal = "";
-        gdegVal = "";
-        guniVal = "";
-    }
-}
+// const grUncheck = () => {
+//     if(checkbox3.checked == false){
+//         gyearVal = "";
+//         gcgpaVal = "";
+//         gsubVal = "";
+//         gdegVal = "";
+//         guniVal = "";
+//     }
+// }
 
 
 if(checkbox1 !== null){
@@ -144,52 +158,109 @@ let gsubVal;
 let gdegVal;
 let guniVal;
 
-const mDetails = (e) => {
-    if(!checkbox1.checked){                                     // after checked and filled up the values in 10th , problem of being unchecked
-        alert('Minimum 10th pass required for making your CV here!');
-        e.preventDefault();
-    }
-    else if(myearVal == "" || mperVal == "" || mschVal == "" || mboardVal == ""){
-        alert('Fill up all the details for 10th!');
-        e.preventDefault();
-    }
-}
+let isValidated = false;
 
-const hgDetails = (e) => {
-    if(checkbox2.checked){
-        if(hyearVal == "" || hperVal == "" || hstrVal == "" || hboardVal == ""){
-            alert('Fill up all the details for 12th!');
-            e.preventDefault();
-        }
-    }
-    if(checkbox3.checked){
-        if(gyearVal == "" || gcgpaVal == "" || gsubVal == "" || gdegVal == "" || guniVal == ""){
-            alert('Fill up all the details for Graduation!');
-            e.preventDefault();                                               // problem this all e
-        }
-    }
-}
 
-const validation = (e) => {
+const fullValidation = () => {
 
     if(userVal == "" || addVal == "" || numVal == ""){
         alert('Please fill all the details!!');
-        e.preventDefault();
+        // e.preventDefault();
+    }
+    else if(!checkbox1.checked){                                     // after checked and filled up the values in 10th , problem of being unchecked
+        alert('Minimum 10th pass required for making your CV here!');
+    }
+    else if(myearVal == "" || mperVal == "" || mschVal == "" || mboardVal == ""){
+        alert('Fill up all the details for 10th!');
+        // e.preventDefault();
+    }
+    else if(checkbox2.checked && (hyearVal == "" || hperVal == "" || hstrVal == "" || hboardVal == "")){
+        alert('Fill up all the details for 12th!');
+    }
+    else if(checkbox3.checked && (gyearVal == "" || gcgpaVal == "" || gsubVal == "" || gdegVal == "" || guniVal == "")){
+        alert('Fill up all the details for Graduation!');
     }
     else if((!userVal.match(letter)) || (!hstrVal.match(letter)) || (!gdegVal.match(letter))){
         alert('Only alphabets are allowed in "Name" , "Stream" , "Degree" areas!!');
-        e.preventDefault();
+        // e.preventDefault();
     }
     else if(numVal.length != 10){
         alert('Phone_no. must have 10 digits!!');
-        e.preventDefault();
+        // e.preventDefault();
     }
     else if(mschVal.match(checkNumber) || (mboardVal.match(checkNumber)) || (hboardVal.match(checkNumber)) || (gsubVal.match(checkNumber)) || (guniVal.match(checkNumber))){
         alert('Numbers not allowed in "School" , "Board" , "Subject" , "University" areas!!');
-        e.preventDefault();
+        // e.preventDefault();
     }
-    
+    else{
+        isValidated = true;
+    }
+
 }
+
+// const mDetails = () => {
+//     // e.preventDefault();
+
+//     if(!checkbox1.checked){                                     // after checked and filled up the values in 10th , problem of being unchecked
+//         alert('Minimum 10th pass required for making your CV here!');
+//     }
+//     else if(myearVal == "" || mperVal == "" || mschVal == "" || mboardVal == ""){
+//         alert('Fill up all the details for 10th!');
+//         // e.preventDefault();
+//     }
+//     else{
+//         // location.href = "index2.html";
+//         isValidated = true;
+//     }
+// }
+
+// const hgDetails = () => {
+//     if(checkbox2.checked){
+//         if(hyearVal == "" || hperVal == "" || hstrVal == "" || hboardVal == ""){
+//             alert('Fill up all the details for 12th!');
+//             // e.preventDefault();
+//         }
+//         else{
+//             isValidated = true;
+//         }
+//     }
+
+
+//     if(checkbox3.checked){
+//         if(gyearVal == "" || gcgpaVal == "" || gsubVal == "" || gdegVal == "" || guniVal == ""){
+//             alert('Fill up all the details for Graduation!');
+//             // e.preventDefault();                                               // problem this all e
+//         }
+//         else{
+//             isValidated = true;
+//         }
+//     }
+    
+// }
+
+// const validation = () => {
+
+//     if(userVal == "" || addVal == "" || numVal == ""){
+//         alert('Please fill all the details!!');
+//         // e.preventDefault();
+//     }
+//     else if((!userVal.match(letter)) || (!hstrVal.match(letter)) || (!gdegVal.match(letter))){
+//         alert('Only alphabets are allowed in "Name" , "Stream" , "Degree" areas!!');
+//         // e.preventDefault();
+//     }
+//     else if(numVal.length != 10){
+//         alert('Phone_no. must have 10 digits!!');
+//         // e.preventDefault();
+//     }
+//     else if(mschVal.match(checkNumber) || (mboardVal.match(checkNumber)) || (hboardVal.match(checkNumber)) || (gsubVal.match(checkNumber)) || (guniVal.match(checkNumber))){
+//         alert('Numbers not allowed in "School" , "Board" , "Subject" , "University" areas!!');
+//         // e.preventDefault();
+//     }
+//     else{
+//         isValidated = true;
+//     }
+    
+// }
 
 
 // const nameExc = () => {
@@ -203,6 +274,10 @@ const validation = (e) => {
 // }
 
 
+        // console.log(checkbox1.checked)
+// if(checkbox1 && checkbox1.checked == true){
+//     secondary.style.display = "block";
+// }
 
 if(button !== null){
     button.addEventListener('click', (e) => {
@@ -229,16 +304,17 @@ if(button !== null){
         gdegVal = Gdeg.value;
         guniVal = Guni.value;
 
-        validation();
-        mDetails();
-        hgDetails();
-        hsUncheck();
-        grUncheck();
+        // validation();
+        // mDetails();
+        // hgDetails();
+        fullValidation();
+        localStorage.clear();
+        // hsUncheck();
+        // grUncheck();
 
         // console.log(addVal)
         // console.log(numVal)
         // nameExc();
-        location.href = 'index2.html';
         localStorage.setItem('Name-value',userVal);
         localStorage.setItem('Add-value',addVal);
         localStorage.setItem('Num-value', numVal);
@@ -248,16 +324,27 @@ if(button !== null){
         localStorage.setItem('Msch-value', mschVal);
         localStorage.setItem('Mboard-value', mboardVal);
 
-        localStorage.setItem('Hyear-value',hyearVal);
-        localStorage.setItem('Hper-value',hperVal);
-        localStorage.setItem('Hstr-value', hstrVal);
-        localStorage.setItem('Hboard-value', hboardVal);
 
-        localStorage.setItem('Gyear-value',gyearVal);
-        localStorage.setItem('Gcgpa-value',gcgpaVal);
-        localStorage.setItem('Gsub-value', gsubVal);
-        localStorage.setItem('Gdeg-value', gdegVal);
-        localStorage.setItem('Guni-value', guniVal);
+        if(checkbox2.checked == true){
+            localStorage.setItem('Hyear-value',hyearVal);
+            localStorage.setItem('Hper-value',hperVal);
+            localStorage.setItem('Hstr-value', hstrVal);
+            localStorage.setItem('Hboard-value', hboardVal);
+        }
+
+        if(checkbox3.checked == true){
+            localStorage.setItem('Gyear-value',gyearVal);
+            localStorage.setItem('Gcgpa-value',gcgpaVal);
+            localStorage.setItem('Gsub-value', gsubVal);
+            localStorage.setItem('Gdeg-value', gdegVal);
+            localStorage.setItem('Guni-value', guniVal);
+        }
+
+        if(isValidated == true){
+            // console.log(isValidated);
+            location.href = 'index2.html';
+        }
+        // document.getElementById("gridContainer1").innerHTML = "<div><h1>Jayeshree Dey</h1></div>"
 
     })
 }
@@ -305,6 +392,46 @@ const GdegVal = localStorage.getItem('Gdeg-value');
 const GuniVal = localStorage.getItem('Guni-value');
 
 
+// if(document.getElementById("gridContainer2") !== null){
+//     if(HyearVal){
+//         document.getElementById("gridContainer2").innerHTML = `<h4>12th:</h4>
+//                         <div>YEAR:</div>
+//                         <div id="secHyear">${HyearVal}</div>
+//                         <h4></h4>
+//                         <div>PERCENTAGE:</div>
+//                         <div id="secHper">${HperVal}</div>
+//                         <h4></h4>                                          // *** IMPORTANT making html grid
+//                         <div>STREAM:</div>
+//                         <div id="secHstr">${HstrVal}</div>
+//                         <h4></h4>
+//                         <div>BOARD:</div>
+//                         <div id="secHboard">${HboardVal}</div>`
+//     }
+// }
+
+if(checkbox2 !== null){
+    if(HyearVal){
+        checkbox2.checked = true;
+        // console.log(checkbox2.checked)
+        hsShow();
+    }
+}
+
+if(checkbox1 !== null){
+    if(MyearVal){
+        checkbox1.checked = true;
+        secondaryShow();
+    }
+}
+
+if(checkbox3 !== null){
+    if(GyearVal){
+        checkbox3.checked = true;
+        grShow();
+    }
+}
+
+
 if(secName !== null || secAdd !== null || secNum !== null || secMyear !== null || secMper !== null || secMsch !== null || secMboard !== null || secHyear !== null || secHper !== null || secHstr !== null || secHboard !== null || secGryear !== null || secGrcgpa !== null || secGrsub !== null || secGrdeg !== null || secGruni !== null){
     secName.textContent = NameVal;
     secAdd.textContent = AddVal;
@@ -337,13 +464,13 @@ const gridContainerSec = document.getElementById("gridContainer2");
 const gridContainerTh = document.getElementById("gridContainer3");
 
 if(gridContainerSec !== null){
-    if(HyearVal!== "" || HperVal!== "" || HstrVal!== "" || HboardVal!== ""){
+    if(HyearVal){
         gridContainerSec.style.visibility = "visible";
     }
 }
 
 if(gridContainerTh !== null){
-    if(GyearVal!== "" || GcgpaVal!== "" || GsubVal!== "" || GdegVal!== "" || GuniVal!== ""){
+    if(GyearVal){
         gridContainerTh.style.visibility = "visible";
     }
 }
@@ -351,10 +478,41 @@ if(gridContainerTh !== null){
 
 
 const refreshButton = document.getElementById("refreshButton");
+const mainCV = document.getElementById("main");
+const downloadBTN = document.getElementById("downloadCV");
 
 if(refreshButton !== null){
     refreshButton.addEventListener('click', (e) => {
-        location.href = 'index.html';
-        e.preventDefault();                              // not working, refresh automatically on this button, opposite page main back arrow <-
+        // location.href = 'index.html';
+        window.history.back();
+        // e.currentTarget.performance.navigation.type = 2;
+        // e.preventDefault();                          // not working, refresh automatically on this button, opposite of page main back arrow <-
     } )
 }
+
+
+// Download pdf
+
+// downloadBTN.addEventListener('click', () => {
+//     downloadPDF();
+// })
+
+// const downloadPDF = () => {
+//     window.jsPDF = window.jspdf.jsPDF;
+
+//     let doc = new jsPDF();
+
+//     doc.html(mainCV, {
+//         callback: function(doc) {
+//             doc.save('sample-document.pdf');
+//         },
+//         x: 15,
+//         y: 15,
+//         width: 170,
+//         windowWidth: 650
+//     });
+// }
+
+// // doc.html(downloadCV, (doc) =>{
+// //     doc.save('sample-document.pdf');
+// // })
