@@ -482,7 +482,7 @@ const mainCV = document.getElementById("main");
 const downloadBTN = document.getElementById("downloadCV");
 
 if(refreshButton !== null){
-    refreshButton.addEventListener('click', (e) => {
+    refreshButton.addEventListener('click', () => {
         // location.href = 'index.html';
         window.history.back();
         // e.currentTarget.performance.navigation.type = 2;
